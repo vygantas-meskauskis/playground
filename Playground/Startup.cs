@@ -1,10 +1,13 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Finance.Client.Infrastructure.AutofacModules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Playground
 {
@@ -18,7 +21,7 @@ namespace Playground
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -27,6 +30,14 @@ namespace Playground
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+
+            var container = new ContainerBuilder();
+            container.Populate(services);
+
+            container.RegisterModule(new FinanceApplicationAutofacModule());
+
+            return new AutofacServiceProvider(container.Build());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
