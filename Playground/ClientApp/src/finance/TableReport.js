@@ -8,7 +8,7 @@ export class TableReport extends Component {
         super(props);
         this.state = { financeData: [], loading: true };
     
-        fetch('api/FinanceData/financeReport')
+        fetch('api/FinanceData/FinanceReport')
         .then(response => response.json())
         .then(data => {
             this.setState({financeData: data, loading: false})

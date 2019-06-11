@@ -12,11 +12,15 @@ namespace Finance.Client.Infrastructure.AutofacModules
         {
             builder.RegisterType<FinanceRepository>()
                 .As<IFinanceRepository>()
-                .InstancePerLifetimeScope();
+                .InstancePerDependency();
 
             builder.RegisterType<FinanceReportService>()
                 .As<IFinanceReportService>()
-                .InstancePerLifetimeScope();
+                .InstancePerDependency();
+
+            builder.RegisterType<FinanceReportMemoryContext>()
+                .As<FinanceReportMemoryContext>()
+                .InstancePerDependency();
         }
     }
 }

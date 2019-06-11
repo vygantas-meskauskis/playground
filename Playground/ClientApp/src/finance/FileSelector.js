@@ -4,10 +4,21 @@ import { Button, Form } from 'react-bootstrap';
 
 class FileSelector extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { file: {} };
+      }
+
     onFileUpload = (event) => {
-        uploadFinanceData(event.target.files[0])
+        this.setState({file: event.target.files[0] });
     };
     
+    async submit(e) {
+        e.preventDefault();
+        uploadFinanceData(this.state.file);
+        this.setState({file: {}});
+      }
+
     render (){
         return (
             <div className="row">
@@ -16,8 +27,10 @@ class FileSelector extends React.Component {
                         <div>
                             <h6>Upload Data</h6>
                         </div>
-                        <input className="form-control" type="file" onChange={(event) => this.onFileUpload(event)} />
-                        <Button variant="btn-primary">Primary</Button>
+                        <form onSubmit={e => this.submit(e)}>
+                            <input className="form-control" type="file" onChange={(event) => this.onFileUpload(event)} />
+                            <Button type="submit" variant="btn-primary">Primary</Button>
+                        </form>
                     </div>
                     
                 </div>

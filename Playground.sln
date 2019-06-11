@@ -21,11 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogTests", "BlogTests\Blog
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Finance", "Finance", "{B72CE822-8E24-4DF6-9335-D5871E8E4B78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Domain", "Finance.Domain\Finance.Domain.csproj", "{09C1CCBD-813C-4798-A2EA-B4C0F3E7F7F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finance.Domain", "Finance.Domain\Finance.Domain.csproj", "{09C1CCBD-813C-4798-A2EA-B4C0F3E7F7F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Infrastructure", "Finance.Infrastructure\Finance.Infrastructure.csproj", "{BC979DCB-DE80-456C-9B5E-DE94FF2B8215}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finance.Infrastructure", "Finance.Infrastructure\Finance.Infrastructure.csproj", "{BC979DCB-DE80-456C-9B5E-DE94FF2B8215}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Client", "Finance.Api\Finance.Client.csproj", "{63441749-9C7F-4555-8493-042DDD24D913}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finance.Client", "Finance.Api\Finance.Client.csproj", "{63441749-9C7F-4555-8493-042DDD24D913}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{98E80A4B-5089-4B82-9453-7249B6509A76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,7 @@ Global
 		{09C1CCBD-813C-4798-A2EA-B4C0F3E7F7F6} = {B72CE822-8E24-4DF6-9335-D5871E8E4B78}
 		{BC979DCB-DE80-456C-9B5E-DE94FF2B8215} = {B72CE822-8E24-4DF6-9335-D5871E8E4B78}
 		{63441749-9C7F-4555-8493-042DDD24D913} = {B72CE822-8E24-4DF6-9335-D5871E8E4B78}
+		{98E80A4B-5089-4B82-9453-7249B6509A76} = {B72CE822-8E24-4DF6-9335-D5871E8E4B78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5669619B-9E29-4DE5-9D08-825C7503C79D}

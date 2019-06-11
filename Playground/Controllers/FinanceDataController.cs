@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Finance.Client.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,47 +16,21 @@ namespace Playground.Controllers
             _financeReportService = financeReportService;
         }
 
-        [HttpPost]
-        public IActionResult UploadData(IFormFile file)
+        [HttpPost("[action]"), DisableRequestSizeLimit]
+        public async Task<IActionResult> UploadData()
         {
-            if (file == null || file.Length == 0)
-                return Content("file not selected");
-
-            var path = Path.Combine(
-                        Directory.GetCurrentDirectory(), "wwwroot",
-                        file.FileName);
-
-            using (var stream = new FileStream(path, FileMode.Create))
+            using (var stream = new MemoryStream())
             {
-                file.CopyToAsync(stream);
+                await Request.Body.CopyToAsync(stream);
             }
 
             return Ok();
         }
 
-        [Route("financeReport")]
-        [HttpGet]
-        public IEnumerable<object> GetFinanceReport()
+        [HttpGet("[action]")]
+        public IEnumerable<object> FinanceReport()
         {
             return _financeReportService.GetAllFinanceReports();
-        }
-
-        [HttpPost]
-        public IActionResult UploadData()
-        {
-            //if (file == null || file.Length == 0)
-            //    return Content("file not selected");
-
-            //var path = Path.Combine(
-            //            Directory.GetCurrentDirectory(), "wwwroot",
-            //            file.FileName);
-
-            //using (var stream = new FileStream(path, FileMode.Create))
-            //{
-            //    file.CopyToAsync(stream);
-            //}
-
-            return Ok();
         }
 
     }
