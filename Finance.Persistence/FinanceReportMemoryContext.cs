@@ -1,13 +1,11 @@
-﻿using Finance.Domain;
+﻿using System.Collections.Generic;
+using Finance.Application.Interfaces;
+using Finance.Domain.Entitites;
 using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Finance.Infrastructure
+namespace Finance.Persistence
 {
-    public class FinanceReportMemoryContext
+    public class FinanceReportMemoryContext : IFinanceDataContext
     {
         private readonly IMemoryCache _memoryCache;
         public FinanceReportMemoryContext(IMemoryCache memoryCache)
@@ -15,16 +13,10 @@ namespace Finance.Infrastructure
             _memoryCache = memoryCache;
         }
 
-        public Task<List<FinanceReport>> FinanceReports
+        public List<FinanceReport> FinanceReports
         {
-            get
-            {
-                return  Task.FromResult(_memoryCache.Get<List<FinanceReport>>("finance-reports"));
-            }
-            set
-            {
-                _memoryCache.Set("finance-reports", value);
-            }
+            get => _memoryCache.Get<List<FinanceReport>>("finance-reports");
+            set => _memoryCache.Set("finance-reports", value);
         }
 
         public void AddFinanceReport(FinanceReport financeReport)
@@ -34,4 +26,5 @@ namespace Finance.Infrastructure
             _memoryCache.Set("finance-reports", reports);
         }
     }
+
 }

@@ -2,10 +2,9 @@
 using System.IO;
 using System.Threading.Tasks;
 using Finance.Client.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Playground.Controllers
+namespace Playground.Feature.Finance
 {
     [Route("api/[controller]")]
     public class FinanceDataController : Controller
@@ -22,6 +21,7 @@ namespace Playground.Controllers
             using (var stream = new MemoryStream())
             {
                 await Request.Body.CopyToAsync(stream);
+                _financeReportService.UploadFile("revolut", stream);
             }
 
             return Ok();

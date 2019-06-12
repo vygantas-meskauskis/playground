@@ -1,8 +1,9 @@
 ﻿using Autofac;
 using Finance.Client.Interfaces;
 using Finance.Client.Services;
-using Finance.Domain;
-using Finance.Infrastructure;
+using Finance.Domain.Interfaces;
+using Finance.Persistence;
+using Finance.Persistence.Repositories;
 
 namespace Finance.Client.Infrastructure.AutofacModules
 {

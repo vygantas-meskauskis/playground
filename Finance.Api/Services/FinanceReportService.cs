@@ -1,8 +1,7 @@
 ﻿using Finance.Client.Interfaces;
-using Finance.Domain;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using Finance.Domain.Interfaces;
 
 namespace Finance.Client.Services
 {
@@ -25,5 +24,12 @@ namespace Finance.Client.Services
                 }
             };
         }
+
+        public void UploadFile(string fileSource, Stream file)
+        {
+            
+        }
     }
+
+
 }

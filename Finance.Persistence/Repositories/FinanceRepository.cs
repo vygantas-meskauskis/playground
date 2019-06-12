@@ -1,9 +1,10 @@
-﻿using Finance.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Finance.Domain.Entitites;
+using Finance.Domain.Interfaces;
 
-namespace Finance.Infrastructure
+namespace Finance.Persistence.Repositories
 {
     public class FinanceRepository : IFinanceRepository
     {
@@ -13,9 +14,10 @@ namespace Finance.Infrastructure
         {
             _context = context;
         }
+
         public Task<List<FinanceReport>> GetAllFinanceReportsAsync()
         {
-            return _context.FinanceReports;
+            return Task.FromResult(_context.FinanceReports);
         }
 
         public Task<FinanceReport> GetFinanceReportAsync(string reportId)

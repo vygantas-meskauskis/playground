@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Finance.Domain
+namespace Finance.Domain.Entitites
 {
     public class FinanceReport
     {
@@ -16,9 +15,9 @@ namespace Finance.Domain
 
         public IReadOnlyList<FinanceRecord> FinanceRecords => _financeRecords;
 
-        public void AddFinanceRecord(decimal money, string currency, string category, string description, DateTime date, string type)
+        public void AddFinanceRecord(double transferAmount, string currency, string category, string description, DateTime date, string type)
         {
-            var record = new FinanceRecord(money, currency, category, description, date, type);
+            var record = new FinanceRecord(transferAmount, currency, category, description, date, type);
             _financeRecords.Add(record);
         }
     }
