@@ -15,6 +15,11 @@ namespace Finance.Persistence.Repositories
             _context = context;
         }
 
+        public FinanceReport Add(FinanceReport financeReport)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<FinanceReport>> GetAllFinanceReportsAsync()
         {
             return Task.FromResult(_context.FinanceReports);
