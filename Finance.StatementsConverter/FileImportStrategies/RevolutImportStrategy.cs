@@ -23,43 +23,39 @@ namespace Finance.StatementsConverter.FileImportStrategies
 
         public List<FinanceRecordItem> ImportFinanceRecords(Stream file)
         {
+            file.Seek(0, SeekOrigin.Begin);
             var financeRecordItems = new List<FinanceRecordItem>();
 
-            using (var reader = new StreamReader(@"C:\test.csv"))
+            using (var reader = new StreamReader(file))
             {
-                List<string> listA = new List<string>();
-                List<string> listB = new List<string>();
-
                 var firstLineRead = false;
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     if (!firstLineRead)
                     {
+                        firstLineRead = true;
                         continue;
                     }
 
                     var values = line.Split(';');
 
                     var date = DateTime.Parse(values[_titleValuePositionDict["Completed Date"]]);
-                    var description = values[_titleValuePositionDict["Description"]];
-                    if (string.IsNullOrEmpty(values[_titleValuePositionDict["Paid Out"]].Trim()))
-                    {
+                    var description = values[_titleValuePositionDict["Description"]].Trim();
+                    var category = values[_titleValuePositionDict["Category"]].Trim();
+                    var balance = double.Parse(values[_titleValuePositionDict["Balance"]].Trim());
+                    var notes = values[_titleValuePositionDict["Notes"]].Trim();
 
-                    }
+                    double transferAmount =
+                        string.IsNullOrEmpty(values[_titleValuePositionDict["Paid Out"]].Trim())
+                            ? double.Parse(values[_titleValuePositionDict["Paid In"]].Trim())
+                            : double.Parse(values[_titleValuePositionDict["Paid Out"]].Trim()) * -1;
 
-                    var financeRecord = new FinanceRecordItem()
-                    listA.Add(values[0]);
-                    listB.Add(values[1]);
+                    financeRecordItems.Add(new FinanceRecordItem(date, description, category, transferAmount, balance, notes));
                 }
             }
 
-            return new List<FinanceRecordItem>
-            {
-                new FinanceRecordItem(DateTime.Now, "description", "groceries", -5.25, 10, "notes")
-            };
+            return financeRecordItems;
         }
-
-        
     }
 }

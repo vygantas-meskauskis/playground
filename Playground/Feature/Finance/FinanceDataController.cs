@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Finance.Client.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Playground.Feature.Finance

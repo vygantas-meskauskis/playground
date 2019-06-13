@@ -6,8 +6,9 @@ namespace Finance.Domain.Interfaces
 {
     public interface IFinanceRepository
     {
-        FinanceReport Add(FinanceReport financeReport);
-        Task<FinanceReport> GetFinanceReportAsync(string reportId);
+        void Add(FinanceReport financeReport);
+        void Update(FinanceReport financeReport);
+        Task<FinanceReport> GetFinanceReportBySourceAsync(string source);
         Task<List<FinanceReport>> GetAllFinanceReportsAsync();
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Finance.Domain.Entitites;
 using Finance.Domain.Interfaces;
@@ -15,19 +15,26 @@ namespace Finance.Persistence.Repositories
             _context = context;
         }
 
-        public FinanceReport Add(FinanceReport financeReport)
+        public void Add(FinanceReport financeReport)
         {
-            throw new NotImplementedException();
+            _context.FinanceReports.Add(financeReport);
+        }
+
+        public void Update(FinanceReport financeReport)
+        {
+            var report = _context.FinanceReports.FirstOrDefault(x => financeReport.GuidId.Equals(x.GuidId));
+            _context.FinanceReports.Remove(report);
+            _context.FinanceReports.Add(financeReport);
+        }
+
+        public Task<FinanceReport> GetFinanceReportBySourceAsync(string source)
+        {
+            return Task.FromResult(_context.FinanceReports.FirstOrDefault(x => x.IsSourceOf(source)));
         }
 
         public Task<List<FinanceReport>> GetAllFinanceReportsAsync()
         {
             return Task.FromResult(_context.FinanceReports);
-        }
-
-        public Task<FinanceReport> GetFinanceReportAsync(string reportId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -18,11 +18,13 @@ namespace Finance.Application.Reports.Commands
     {
         private readonly IBankStatementsImportStrategyFactory _bankStatementsImportStrategy;
         private readonly IFinanceRepository _financeRepository;
+        private readonly IMediator _mediator;
 
-        public UploadFileCommandHandler(IBankStatementsImportStrategyFactory bankStatementsImportStrategy, IFinanceRepository financeRepository)
+        public UploadFileCommandHandler(IBankStatementsImportStrategyFactory bankStatementsImportStrategy, IFinanceRepository financeRepository, IMediator mediator)
         {
             _bankStatementsImportStrategy = bankStatementsImportStrategy;
             _financeRepository = financeRepository;
+            _mediator = mediator;
         }
 
         public async Task<bool> Handle(UploadFileCommand request, CancellationToken cancellationToken)
@@ -30,14 +32,19 @@ namespace Finance.Application.Reports.Commands
             var importStrategy = _bankStatementsImportStrategy.CreateStrategy(request.FileSource);
             var bankStatements = importStrategy.ImportFinanceRecords(request.FileStream);
 
-            //var financeReport = new FinanceReport(request.FileSource);
-            //foreach (var financeRecordItem in bankStatements)
-            //{
-            //    financeReport.AddFinanceRecord(financeRecordItem.TransferAmount);
-            //}
-            //_financeRepository.Add()
+            var financeReport = await _financeRepository.GetFinanceReportBySourceAsync(request.FileSource);
+            if (financeReport == null)
+            {
+                return await _mediator.Send(new CreateFinanceReportCommand
+                {
+                    Currency = "Eur",
+                    FinanceRecordItems = bankStatements,
+                    ReportSource = request.FileSource
+                }, cancellationToken);
+            }
+
+            _financeRepository.Update(financeReport);
             return true;
-            //bankStatements
         }
     }
 }

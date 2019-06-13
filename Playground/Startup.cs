@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Reflection;
+using Finance.Application.Reports.Commands;
+using MediatR;
 
 namespace Playground
 {
@@ -31,9 +34,12 @@ namespace Playground
                 configuration.RootPath = "ClientApp/build";
             });
 
+            //Add MediatR
+            services.AddMediatR(typeof(UploadFileCommand).GetTypeInfo().Assembly);
 
             var container = new ContainerBuilder();
             container.Populate(services);
+            container.RegisterModule(new MediatorModule());
 
             container.RegisterModule(new FinanceApplicationAutofacModule());
 

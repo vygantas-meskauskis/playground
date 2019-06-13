@@ -1,9 +1,11 @@
 ﻿using Autofac;
+using Finance.Application.Interfaces;
 using Finance.Client.Interfaces;
 using Finance.Client.Services;
 using Finance.Domain.Interfaces;
 using Finance.Persistence;
 using Finance.Persistence.Repositories;
+using Finance.StatementsConverter.FileImportStrategies;
 
 namespace Finance.Client.Infrastructure.AutofacModules
 {
@@ -17,6 +19,10 @@ namespace Finance.Client.Infrastructure.AutofacModules
 
             builder.RegisterType<FinanceReportService>()
                 .As<IFinanceReportService>()
+                .InstancePerDependency();
+
+            builder.RegisterType<BankStatementsImportStrategyFactory>()
+                .As<IBankStatementsImportStrategyFactory>()
                 .InstancePerDependency();
 
             builder.RegisterType<FinanceReportMemoryContext>()

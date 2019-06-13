@@ -6,19 +6,29 @@ namespace Finance.Domain.Entitites
     public class FinanceReport
     {
         private readonly List<FinanceRecord> _financeRecords;
-        private string _moneySourceName;
+        public string Source { get; }
+        public string Currency { get; }
+        public string GuidId { get; }
 
-        public FinanceReport(string moneySourceName)
+        public FinanceReport(string source, string currency)
         {
-            _moneySourceName = moneySourceName;
+            Source = source;
+            Currency = currency;
+            GuidId = Guid.NewGuid().ToString();
         }
 
         public IReadOnlyList<FinanceRecord> FinanceRecords => _financeRecords;
 
-        public void AddFinanceRecord(double transferAmount, string currency, string category, string description, DateTime date, string type)
+        public void AddFinanceRecord(double transferAmount, string category, string description, DateTime date, string notes)
         {
-            var record = new FinanceRecord(transferAmount, currency, category, description, date, type);
+            var record = new FinanceRecord(transferAmount, category, description, date, notes);
             _financeRecords.Add(record);
         }
+
+        public bool IsSourceOf(string source)
+        {
+            return source.Equals(Source, StringComparison.CurrentCultureIgnoreCase);
+        }
+
     }
 }

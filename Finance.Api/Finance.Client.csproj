@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Finance.Domain\Finance.Domain.csproj" />
     <ProjectReference Include="..\Finance.Persistence\Finance.Persistence.csproj" />
+    <ProjectReference Include="..\Finance.StatementsConverter\Finance.StatementsConverter.csproj" />
   </ItemGroup>
 
 </Project>
