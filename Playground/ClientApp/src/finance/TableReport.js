@@ -17,7 +17,8 @@ export class TableReport extends Component {
 
       static renderReportTable(financeData){
         return(
-
+          {financeData.map(data => 
+            
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
@@ -28,7 +29,7 @@ export class TableReport extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {financeData.map(element =>
+                    {data.map(element =>
                             <tr>
                                 <td>1</td>
                                 <td>Mark</td>
@@ -38,6 +39,7 @@ export class TableReport extends Component {
                 )}
                 </tbody>
             </Table>
+            )}
         );
     }
 

@@ -1,39 +1,29 @@
 ﻿using Finance.Client.Interfaces;
-using System.Collections.Generic;
 using System.IO;
 using Finance.Application.Reports.Commands;
-using Finance.Application.Reports.Models;
-using Finance.Domain.Interfaces;
 using MediatR;
+using Finance.Application.Reports.Queries;
+using System.Threading.Tasks;
 
 namespace Finance.Client.Services
 {
     public class FinanceReportService : IFinanceReportService
     {
-        private readonly IFinanceRepository _financeRepository;
         private readonly IMediator _mediator;
 
-        public FinanceReportService(IFinanceRepository financeRepository,IMediator _mediator)
+        public FinanceReportService(IMediator _mediator)
         {
-            _financeRepository = financeRepository;
             this._mediator = _mediator;
         }
 
-        public IEnumerable<FinanceRecordItem> GetAllFinanceReports()
+        public async Task<FinanceReportListViewModel> GetAllFinanceReports()
         {
-            return new List<object>
-            {
-                new
-                {
-                    Source = "Natwest",
-                    Amount = "3.1"
-                }
-            };
+            return await _mediator.Send(new GetAllFinanceReportsQuery());
         }
 
-        public void UploadFile(string fileSource, Stream file)
+        public async Task UploadFileAsync(string fileSource, Stream file)
         {
-            _mediator.Send(new UploadFileCommand
+            await _mediator.Send(new UploadFileCommand
             {
                 FileSource = fileSource,
                 FileStream = file

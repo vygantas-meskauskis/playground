@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Finance.Application.Reports.Queries;
 using Finance.Client.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,16 +23,17 @@ namespace Playground.Feature.Finance
             using (var stream = new MemoryStream())
             {
                 await Request.Body.CopyToAsync(stream);
-                _financeReportService.UploadFile("revolut", stream);
+                await _financeReportService.UploadFileAsync("revolut", stream);
             }
 
             return Ok();
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<object> FinanceReport()
+        public async Task<IEnumerable<FinanceReportViewModel>> FinanceReportAsync()
         {
-            return _financeReportService.GetAllFinanceReports();
+            var reports =  await _financeReportService.GetAllFinanceReports();
+            return reports.FinanceReportViewModels;
         }
 
     }

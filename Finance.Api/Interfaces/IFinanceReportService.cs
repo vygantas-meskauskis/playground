@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Finance.Application.Reports.Queries;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Finance.Client.Interfaces
 {
     public interface IFinanceReportService
     {
-        IEnumerable<object> GetAllFinanceReports();
-        void UploadFile(string fileSource, Stream file);
+        Task<FinanceReportListViewModel> GetAllFinanceReports();
+        Task UploadFileAsync(string fileSource, Stream file);
     }
 }
