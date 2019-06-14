@@ -18,6 +18,9 @@ namespace Finance.Persistence.Repositories
         public void Add(FinanceReport financeReport)
         {
             _context.FinanceReports.Add(financeReport);
+            var financeReports = _context.FinanceReports;
+            financeReports.Add(financeReport);
+            _context.FinanceReports = financeReports;
         }
 
         public void Update(FinanceReport financeReport)

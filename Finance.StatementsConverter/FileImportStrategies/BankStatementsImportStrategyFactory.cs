@@ -11,6 +11,8 @@ namespace Finance.StatementsConverter.FileImportStrategies
             {
                 case "revolut":
                     return new RevolutRecordsImportStrategy();
+                case "natwest":
+                    return new NatwestRecordsImportStrategy();
                 default:
                     throw new NotSupportedException();
             }

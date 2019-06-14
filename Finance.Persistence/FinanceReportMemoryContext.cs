@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Finance.Application.Interfaces;
 using Finance.Domain.Entitites;
 using Microsoft.Extensions.Caching.Memory;
@@ -15,7 +16,7 @@ namespace Finance.Persistence
 
         public List<FinanceReport> FinanceReports
         {
-            get => _memoryCache.Get<List<FinanceReport>>("finance-reports");
+            get => _memoryCache.Get<List<FinanceReport>>("finance-reports") ?? new List<FinanceReport>();
             set => _memoryCache.Set("finance-reports", value);
         }
 

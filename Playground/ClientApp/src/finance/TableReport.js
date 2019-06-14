@@ -17,36 +17,43 @@ export class TableReport extends Component {
 
       static renderReportTable(financeData){
         return(
-          {financeData.map(data => 
-            
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
                     <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                    <th>Date</th>
+                    <th>TransferAmount</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Notes</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map(element =>
+                    {financeData.financeRecordViewModels.map(element =>
                             <tr>
                                 <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>{element.date}</td>
+                                <td>{element.transferAmount}</td>
+                                <td>{element.description}</td>
+                                <td>{element.category}</td>
+                                <td>{element.notes}</td>
                             </tr>
                 )}
                 </tbody>
             </Table>
-            )}
         );
     }
 
 render() {
-    let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : TableReport.renderReportTable(this.state.financeData);
+  let contents;
+    if (this.state.loading){
+      contents = <p><em>Loading...</em></p>;
+    } else if (this.state.financeData.financeReportViewModels === undefined 
+      || this.state.financeData.financeReportViewModels.length == 0){
+        contents = <p>no data</p>
+    } else {
+      contents = TableReport.renderReportTable(this.state.financeData.financeReportViewModels[0]);
+    }
 
     return (
       <div>

@@ -4,6 +4,7 @@ using Finance.Application.Reports.Commands;
 using MediatR;
 using Finance.Application.Reports.Queries;
 using System.Threading.Tasks;
+using Finance.Application.Reports.Models;
 
 namespace Finance.Client.Services
 {

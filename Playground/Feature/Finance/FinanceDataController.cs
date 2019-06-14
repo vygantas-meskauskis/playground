@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Finance.Application.Reports.Models;
 using Finance.Application.Reports.Queries;
 using Finance.Client.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -30,11 +31,9 @@ namespace Playground.Feature.Finance
         }
 
         [HttpGet("[action]")]
-        public async Task<IEnumerable<FinanceReportViewModel>> FinanceReportAsync()
+        public async Task<ActionResult<FinanceReportListViewModel>> FinanceReport()
         {
-            var reports =  await _financeReportService.GetAllFinanceReports();
-            return reports.FinanceReportViewModels;
+            return Ok(await _financeReportService.GetAllFinanceReports());
         }
-
     }
 }

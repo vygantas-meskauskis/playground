@@ -5,7 +5,7 @@ namespace Finance.Domain.Entitites
 {
     public class FinanceReport
     {
-        private readonly List<FinanceRecord> _financeRecords;
+        private List<FinanceRecord> _financeRecords;
         public string Source { get; }
         public string Currency { get; }
         public string GuidId { get; }
@@ -22,6 +22,10 @@ namespace Finance.Domain.Entitites
         public void AddFinanceRecord(double transferAmount, string category, string description, DateTime date, string notes)
         {
             var record = new FinanceRecord(transferAmount, category, description, date, notes);
+            if (_financeRecords == null)
+            {
+                _financeRecords = new List<FinanceRecord>();
+            }
             _financeRecords.Add(record);
         }
 
