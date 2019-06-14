@@ -33,7 +33,7 @@ namespace Finance.StatementsConverter.FileImportStrategies
                 {
                     var line = reader.ReadLine();
 
-                    var values = line.Split(';');
+                    var values = line.Split(',');
 
                     var date = DateTime.Parse(values[_titleValuePositionDict["Date"]]);
                     var description = values[_titleValuePositionDict["Description"]].Trim();

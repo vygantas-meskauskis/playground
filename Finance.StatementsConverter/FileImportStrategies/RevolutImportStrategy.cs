@@ -58,12 +58,4 @@ namespace Finance.StatementsConverter.FileImportStrategies
             return financeRecordItems;
         }
     }
-
-    public class NatwestRecordsImportStrategy : IBankRecordsImportStrategy
-    {
-        public List<FinanceRecordItem> ImportFinanceRecords(Stream file)
-        {
-            return new List<FinanceRecordItem>();
-        }
-    }
 }
