@@ -6,6 +6,13 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Finance.Persistence
 {
+    public class FinanceReportCollection : List<FinanceReport>
+    {
+        public new void Add(FinanceReport report)
+        {
+
+        }
+    }
     public class FinanceReportMemoryContext : IFinanceDataContext
     {
         private readonly IMemoryCache _memoryCache;

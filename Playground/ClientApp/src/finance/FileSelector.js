@@ -6,7 +6,7 @@ class FileSelector extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { file: {} };
+        this.state = { file: null };
       }
 
     onFileUpload = (event) => {
@@ -29,7 +29,7 @@ class FileSelector extends React.Component {
                         </div>
                         <form onSubmit={e => this.submit(e)}>
                             <input className="form-control" type="file" onChange={(event) => this.onFileUpload(event)} />
-                            <Button type="submit" variant="btn-primary">Primary</Button>
+                            <Button disabled={!this.state.file} type="submit" variant="btn-primary">Import</Button>
                         </form>
                     </div>
                     

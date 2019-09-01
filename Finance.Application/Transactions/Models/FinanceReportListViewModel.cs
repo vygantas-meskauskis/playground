@@ -2,7 +2,7 @@
 
 namespace Finance.Application.Reports.Models
 {
-    public class FinanceReportListViewModel
+    public class FinanceTransactionsListViewModel
     {
         public IEnumerable<FinanceReportViewModel> FinanceReportViewModels { get; set; }
     }

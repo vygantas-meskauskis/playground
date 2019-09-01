@@ -20,9 +20,9 @@ export class TableReport extends Component {
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
-                    <th>#</th>
                     <th>Date</th>
                     <th>TransferAmount</th>
+                    <th>Balance</th>
                     <th>Description</th>
                     <th>Category</th>
                     <th>Notes</th>
@@ -31,9 +31,9 @@ export class TableReport extends Component {
                 <tbody>
                     {financeData.financeRecordViewModels.map(element =>
                             <tr>
-                                <td>1</td>
                                 <td>{element.date}</td>
                                 <td>{element.transferAmount}</td>
+                                <td>{element.balance}</td>
                                 <td>{element.description}</td>
                                 <td>{element.category}</td>
                                 <td>{element.notes}</td>

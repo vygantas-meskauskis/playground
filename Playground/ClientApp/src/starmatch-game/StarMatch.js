@@ -4,7 +4,10 @@ import {range, random, sum} from './utils/math.js';
 import StarDisplay from './StarDisplay';
 
 const PlayNumber = props => (
-  <button className="number" onClick={() => console.log("num: " + props.number)}>
+  <button 
+    className="number" 
+    onClick={() => console.log("num: " + props.number)}
+    >
     {props.number}
   </button>
 );

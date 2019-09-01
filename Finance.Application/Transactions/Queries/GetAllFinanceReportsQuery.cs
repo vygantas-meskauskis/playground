@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Finance.Application.Reports.Queries
 {
-    public class GetAllFinanceReportsQuery : IRequest<FinanceReportListViewModel>
+    public class GetAllFinanceReportsQuery : IRequest<FinanceTransactionsListViewModel>
     {
     }
 }

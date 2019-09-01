@@ -28,7 +28,7 @@ namespace Finance.Application.Reports.Commands
             var financeReport = new FinanceReport(request.ReportSource, request.Currency);
             foreach (var recordItem in request.FinanceRecordItems)
             {
-                financeReport.AddFinanceRecord(recordItem.TransferAmount, recordItem.Category, recordItem.Description, recordItem.Date, recordItem.Notes);
+                financeReport.AddFinanceRecord(recordItem.TransferAmount, recordItem.Balance, recordItem.Category, recordItem.Description, recordItem.Date, recordItem.Notes);
             }
 
             _financeRepository.Add(financeReport);

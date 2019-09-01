@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Finance.Domain.Entitites
 {
@@ -19,9 +20,9 @@ namespace Finance.Domain.Entitites
 
         public IReadOnlyList<FinanceRecord> FinanceRecords => _financeRecords;
 
-        public void AddFinanceRecord(double transferAmount, string category, string description, DateTime date, string notes)
+        public void AddFinanceRecord(double transferAmount, double balance, string category, string description, DateTime date, string notes)
         {
-            var record = new FinanceRecord(transferAmount, category, description, date, notes);
+            var record = new FinanceRecord(transferAmount, balance, category, description, date, notes);
             if (_financeRecords == null)
             {
                 _financeRecords = new List<FinanceRecord>();
@@ -34,5 +35,14 @@ namespace Finance.Domain.Entitites
             return source.Equals(Source, StringComparison.CurrentCultureIgnoreCase);
         }
 
+        public double GetTransferedOutMoneySum()
+        {
+            return _financeRecords.Where(x => x.TransferAmount < 0).Sum(x => x.TransferAmount);
+        }
+
+        public double GetTransferedInMoneySum()
+        {
+            return _financeRecords.Where(x => x.TransferAmount > 0).Sum(x => x.TransferAmount);
+        }
     }
 }

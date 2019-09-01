@@ -8,6 +8,7 @@ namespace Finance.Application.Reports.Models
     {
         public string Category { get; set; }
         public double TransferAmount { get; set; }
+        public double Balance { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public string Notes { get; set; }
@@ -22,7 +23,8 @@ namespace Finance.Application.Reports.Models
                     Category = financeRecord.Category,
                     Date = financeRecord.Date,
                     Description = financeRecord.Description,
-                    Notes = financeRecord.Notes
+                    Notes = financeRecord.Notes,
+                    Balance = financeRecord.Balance
                 };
             }
         }
